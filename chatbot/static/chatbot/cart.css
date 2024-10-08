@@ -1,0 +1,120 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background: #007bff; /* Bootstrap primary color */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a.active {
+    text-decoration: underline; /* underline active link */
+}
+
+/* Main Section */
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Cart Items Section */
+.current-cart, .previous-purchases, .continue-shopping {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.current-cart ul, .previous-purchases ul {
+    list-style: none;
+}
+
+.current-cart li, .previous-purchases li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.current-cart li:last-child, .previous-purchases li:last-child {
+    border-bottom: none; /* remove border from last item */
+}
+
+button {
+    background: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Continue Shopping Link */
+.continue-shopping a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    background: #007bff; /* Same as header */
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}

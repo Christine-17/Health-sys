@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart</title>
+    {% load static %} <!-- Load the static files library -->
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}"> <!-- Link to your CSS file -->
+    <style>
+        /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background: #007bff; /* Bootstrap primary color */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a.active {
+    text-decoration: underline; /* underline active link */
+}
+
+/* Main Section */
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Cart Items Section */
+.current-cart, .previous-purchases, .continue-shopping {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.current-cart ul, .previous-purchases ul {
+    list-style: none;
+}
+
+.current-cart li, .previous-purchases li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.current-cart li:last-child, .previous-purchases li:last-child {
+    border-bottom: none; /* remove border from last item */
+}
+
+button {
+    background: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Continue Shopping Link */
+.continue-shopping a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    background: #007bff; /* Same as header */
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Header Styles */
+header {
+    background-color: #007acc; /* Bright blue */
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline; /* Display items inline */
+    margin: 0 15px; /* Add spacing between links */
+}
+
+nav ul li a {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* Link color */
+    padding: 10px 20px; /* Add padding around the links */
+    background-color: #005f99; /* Darker blue for buttons */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+nav ul li a:hover {
+    background-color: #0099cc; /* Lighter blue on hover */
+    color: white; /* Maintain white text color on hover */
+}
+
+/* Active Link Style */
+nav ul li a.active {
+    background-color: #007acc; /* Maintain the active link color */
+    color: white; /* Maintain white text color */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        
+        <h1>Your Shopping Cart</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'online_shopping' %}">Shop Online</a></li>
+             </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Current Cart Items Section -->
+        <section class="current-cart">
+            <h2>Current Cart Items</h2>
+            {% if cart_items %}
+            <ul>
+                {% for item in cart_items %}
+                <li>
+                    <h3>{{ item.medication.name }}</h3>
+                    <p>Price: {{ item.medication.price }} USD</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <form action="{% url 'remove_from_cart' item.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Remove from Cart</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+            <p>Total Price: {{ total_price }} USD</p>
+            <form action="{% url 'checkout' %}" method="GET">
+                <button type="submit">Proceed to Checkout</button>
+            </form>
+            {% else %}
+            <p>Your cart is currently empty.</p>
+            {% endif %}
+        </section>
+
+        <!-- Previous Purchases Section -->
+        <section class="previous-purchases">
+            <h2>Your Previous Purchases</h2>
+            {% if previous_purchases %}
+            <ul>
+                {% for purchase in previous_purchases %}
+                <li>
+                    <h3>{{ purchase.medication.name }}</h3>
+                    <p>Price: {{ purchase.medication.price }} USD</p>
+                    <p>Date Purchased: {{ purchase.date_purchased }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No previous purchases found.</p>
+            {% endif %}
+        </section>
+
+        <!-- Continue Shopping Button -->
+        <section class="continue-shopping">
+            <h2>Continue Shopping</h2>
+            <a href="{% url 'online_shopping' %}">Go to Shop</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Dovey Chemist - Your Trusted Online Pharmacy</p>
+    </footer>
+</body>
+</html>

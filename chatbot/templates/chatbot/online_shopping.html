@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dovey Chemist - Online Pharmacy</title>
+   <style>
+    /* General Reset */
+    body, h1, h2, h3, p, ul, li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+    
+    /* Header Styles */
+    header {
+        background-color: #007bff; /* Blue background */
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+    }
+    
+    header h1 {
+        margin-bottom: 10px;
+        font-size: 2.5rem;
+    }
+    
+    nav ul {
+        display: flex;
+        justify-content: center;
+        padding: 0;
+    }
+    
+    nav ul li {
+        margin: 0 15px;
+    }
+    
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+        color: #ffcc00; /* Yellow on hover */
+    }
+    
+    /* Main Styles */
+    main {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Section Styles */
+    section {
+        margin-bottom: 20px;
+    }
+    
+    section h2 {
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        color: #007bff; /* Blue color for headings */
+    }
+    
+    section p {
+        margin-bottom: 15px;
+    }
+    
+    /* Prescription Section Styles */
+    .prescription-section {
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        padding: 15px;
+        background-color: #e9f5ff; /* Light blue background */
+    }
+    
+    .prescription-section button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .prescription-section button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+    
+    /* Medication Catalog Section Styles */
+    .catalog {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .medication-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .medication-card {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 15px;
+        background: #f8f8f8;
+        text-align: center;
+        transition: box-shadow 0.3s;
+    }
+    
+    .medication-card:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .medication-card img {
+        border-radius: 4px;
+    }
+    
+    /* Online Counseling Chatbot Styles */
+    .counseling-section {
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        padding: 15px;
+        background-color: #e9f5ff; /* Light blue background */
+    }
+    
+    .chatbot {
+        margin-top: 10px;
+        height: 400px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    
+    .chatbot iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    
+    /* Footer Styles */
+    footer {
+        text-align: center;
+        padding: 20px 0;
+        background: #007bff;
+        color: white;
+    }
+    
+    footer p {
+        margin: 0;
+    }
+    
+
+   </style>
+</head>
+<body>
+    <header>
+        <h1>Order Medicines Online - Dovey Chemist</h1>
+        <nav>
+            <ul>
+             
+                <li><a href="{% url 'online_shopping' %}">Shop Online</a></li>
+                <li><a href="{% url 'online_counselling' %}">Online Counselling</a></li>
+                <li><a href="{% url 'cart' %}">Cart</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Prescription Submission Section -->
+        <section class="prescription-section">
+            <h2>Submit Your Prescription</h2>
+            <p>Please upload your prescription to receive your personalized medication, compounding services, or any other health facilities you need.</p>
+            <form action="{% url 'upload_prescription' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="prescription">Upload Prescription (PDF, Image):</label>
+                <input type="file" name="prescription" id="prescription" required>
+                <button type="submit">Submit Prescription</button>
+            </form>
+        </section>
+
+        <!-- Medication Catalog Section -->
+        <section class="catalog">
+            <h2>Available Medications</h2>
+            <div class="medication-list">
+                {% for medication in medications %}
+                <div class="medication-card">
+                    <img src="{{ medication.image_url }}" alt="{{ medication.name }}" width="200" height="150">
+                    <h3>{{ medication.name }}</h3>
+                    <p>{{ medication.description }}</p>
+                    <p>Price: {{ medication.price }} USD</p>
+                    <form action="{% url 'add_to_cart' medication.id %}" method="POST">
+                        {% csrf_token %}
+                        <label for="quantity_{{ medication.id }}">Quantity:</label>
+                        <input type="number" name="quantity" id="quantity_{{ medication.id }}" min="1" max="10" value="1">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Online Counseling Chatbot -->
+        <section class="counseling-section">
+            <h2>Get Online Counseling</h2>
+            <p>Speak to our pharmacists about your health concerns via our chatbot for immediate assistance.</p>
+            <div class="chatbot">
+                <!-- Chatbot integration iframe -->
+                <iframe src="{% url 'chatbot' %}" title="Online Counseling Chatbot"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Dovey Chemist - Your Trusted Online Pharmacy</p>
+    </footer>
+</body>
+</html>

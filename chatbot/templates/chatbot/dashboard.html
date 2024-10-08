@@ -1,0 +1,554 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'static/dashboard.css' %}">
+    <style>
+        /* General reset and basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        
+        header {
+            background-color: #1e90ff;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Main content styles */
+        main {
+            padding: 40px;
+        }
+        
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex-basis: calc(33.333% - 20px);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .card h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: #1e90ff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        
+            .card {
+                flex-basis: 100%;
+            }
+        }
+        /* General styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #1a8ccb;
+        }
+        
+        /* Global Reach Section */
+        .global-reach {
+            padding: 40px;
+            background-color: #e7f2f8;
+            text-align: center;
+            border-radius: 10px;
+            margin: 50px auto;
+            width: 80%;
+        }
+        
+        .global-reach p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #444;
+        }
+        
+        .global-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .global-images img {
+            width: 350px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .global-images img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 40px;
+            background-color: #f4f4f9;
+            text-align: center;
+            margin: 50px auto;
+            border-radius: 10px;
+            width: 80%;
+        }
+        
+        .testimonials h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a8ccb;
+        }
+        
+        blockquote {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin: 30px auto;
+            max-width: 700px;
+            line-height: 1.6;
+            color: #555;
+            background-color: #fff;
+            padding: 20px;
+            border-left: 5px solid #1a8ccb;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        blockquote strong {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+        }
+        
+        /* Multilingual Support Section */
+        .support {
+            padding: 40px;
+            background-color: #e7f2f8;
+            text-align: center;
+            border-radius: 10px;
+            margin: 50px auto;
+            width: 80%;
+        }
+        
+        .support p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #444;
+        }
+        
+        .support img {
+            width: 350px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .support img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 20px;
+            background-color: #1a8ccb;
+            text-align: center;
+            color: #fff;
+        }
+        
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+        /* Health Facilities Section */
+.health-facilities {
+    padding: 40px;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin: 50px auto;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.facilities-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.facility {
+    width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.facility img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.facility h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #1a8ccb;
+}
+
+.facility p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.facility:hover {
+    transform: scale(1.05);
+}
+
+/* Our Values Section */
+.our-values {
+    padding: 40px;
+    background-color: #e7f2f8;
+    text-align: center;
+    margin: 50px auto;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.our-values ul {
+    list-style-type: disc;
+    padding: 20px;
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.our-values ul li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body Styles */
+body {
+    position: relative; /* Set position to relative for absolute positioning of chatbox */
+    background-color: #f0f8ff; /* AliceBlue background */
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: #007acc; /* Bright blue */
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Chat Container Styles */
+.chat-container {
+    position: fixed; /* Position fixed to stay on the right side */
+    bottom: 20px; /* Space from bottom */
+    right: 20px; /* Space from right */
+    width: 300px; /* Width of the chatbox */
+    background-color: #fff; /* White background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Prevent overflow */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.chat-container h1 {
+    background-color: #007acc; /* Bright blue for the header */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* Chat Box Styles */
+.chat-box {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0; /* Light gray border */
+}
+
+.chat-box:last-child {
+    border-bottom: none; /* Remove border for last child */
+}
+
+.chat-input {
+    display: flex; /* Use flexbox for alignment */
+    padding: 10px;
+    background-color: #f9f9f9; /* Light gray background */
+}
+
+.chat-input textarea {
+    flex: 1; /* Allow textarea to take available space */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Light border */
+    resize: none; /* Disable resizing */
+}
+
+.chat-input button {
+    padding: 10px;
+    margin-left: 5px; /* Space between textarea and button */
+    background-color: #007acc; /* Bright blue button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.chat-input button:hover {
+    background-color: #005f99; /* Darker blue on hover */
+}
+        </style>
+</head>
+<body>
+    <header>
+       
+        <h1>Welcome to Dovey Chemist</h1>
+<nav>
+            <ul>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'online_shopping' %}">Shop Online</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </nav>
+    </header><br><br>
+    <p>
+        Our goal at Dovey Chemist is to give you the best possible medical care. 
+        We can help you whether you're searching for over-the-counter treatments, prescription drugs, or professional guidance on wellness and health. Our amiable staff is dedicated to making sure you receive individualized care and attention in a cozy setting. 
+        Our top goal is your well-being, and we work hard to make your visit enjoyable and fruitful. 
+        We appreciate you selecting Dovey Chemist, where your health is our top priority!
+    </p>
+            
+    <main>
+        <section class="cards">
+            <div class="card">
+                <h2>Dovey Chemist</h2>
+                 <p>
+                    <img src="{% static 'chatbot/images/pharma.jpeg' %}" alt="My Image" width="600" height="400">
+                    Dovey Chemist ensures that every visit is met with care, expertise, and a warm atmosphere. 
+                    This dedication to community health makes it the best chemist you could ever find!
+                </p>
+            </div>
+            <div class="card">
+                <h2>Best Offered Facilities</h2>
+                <p>
+                    <img src="{% static 'chatbot/images/qualified facilites.jpg' %}" alt="My Image" width="600" height="400">
+                    Dovey Chemist offers a wide range of services, including prescription medication dispensing, over-the-counter
+                     advice, health consultations, and compounding services. With a commitment to patient well-being,.</p>
+            </div>
+            <div class="card">
+                <h2>High Qualified Staff Management</h2>
+                <p>
+                    <img src="{% static 'chatbot/images/teamwork.webp' %}" alt="My Image" width="600" height="400">
+                    Dovey Chemist is a master at well-organized administration, 
+                    guaranteeing smooth operations and top-notch client care. 
+                    Staff members are able to provide high-quality care because of the
+                     committed management team's implementation of best practices and promotion of good 
+                     communication.
+                </p>
+            </div>
+        </section>
+    </main>
+<!-- Health Facilities Section -->
+<section class="health-facilities">
+    <h2>Our Advanced Health Facilities</h2>
+    <p>
+        Dovey Chemist prides itself on offering state-of-the-art health facilities designed to serve patients' diverse needs. 
+        Whether you need immediate prescriptions, specialized medication compounding, or long-term treatment solutions, 
+        we have you covered.
+    </p>
+    <div class="facilities-list">
+        <div class="facility">
+            <img src="{% static 'chatbot/images/pharmacy_counselling.jpg' %}" alt="Pharmacy Counseling" width="600" height="400">
+            <h3>Pharmacy Counseling</h3>
+            <p>Our trained pharmacists provide personalized medication counseling to ensure you're informed about your treatment options.</p>
+        </div>
+        <div class="facility">
+            <img src="{% static 'chatbot/images/presciption_delivery.webp' %}" alt="Prescription Delivery" width="600" height="400">
+            <h3>Prescription Delivery</h3>
+            <p>Our prescription delivery service ensures that your medication reaches you, no matter where you are, quickly and reliably.</p>
+        </div>
+        <div class="facility">
+            <img src="{% static 'chatbot/images/medication_compounding.jpg' %}" alt="Medication Compounding" width="600" height="400">
+            <h3>Medication Compounding</h3>
+            <p>Our on-site compounding lab tailors medications to suit specific needs, including pediatric, geriatric, and allergy-sensitive formulations.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Our Values Section -->
+<section class="our-values">
+    <h2>Our Commitment to Excellence</h2>
+    <p>
+        Dovey Chemist stands by its core values: integrity, compassion, innovation, and community well-being. 
+        We believe in putting the health of our customers first, with a constant focus on improving healthcare delivery worldwide.
+    </p>
+    <ul>
+        <li>Customer First: We always prioritize the needs of our customers.</li>
+        <li>Global Partnerships: Working with international leaders in pharmaceuticals and healthcare.</li>
+        <li>Innovation: Continuously improving to bring you the best in health services.</li>
+        <li>Community Care: Supporting local and international communities through various health initiatives.</li>
+    </ul>
+</section>
+   <!-- Global Reach Section -->
+   <section class="global-reach">
+    <h2>Our Global Reach</h2>
+    <p>
+        Dovey Chemist has partnered with leading pharmaceutical companies and healthcare providers worldwide.
+        We proudly serve communities across North America, Europe, Africa, and Asia.
+    </p>
+    <div class="global-images">
+        <img src="{% static 'chatbot/images/global_coverage.webp' %}" alt="Global Reach" width="600" height="400">
+        <img src="{% static 'chatbot/images/who.jpg' %}" alt="International Partners" width="600" height="400">
+    </div>
+</section>
+
+<!-- Customer Testimonials Section -->
+<section class="testimonials">
+    <h2>What Our International Customers Say</h2>
+    <blockquote>
+        <p>"Dovey Chemist is our go-to pharmacy for all our prescription needs. Their global reach and customer service 
+        are unmatched!" - <strong>Maria, Spain</strong></p>
+    </blockquote>
+    <blockquote>
+        <p>"I love the easy accessibility and fast delivery, even from another continent. Highly recommend!" 
+        - <strong>John, Kenya</strong></p>
+    </blockquote>
+</section>
+
+<!-- Multilingual Support Section -->
+<section class="support">
+    <h2>Multilingual Support</h2>
+    <p>
+        We understand the diverse needs of our international customers. That's why Dovey Chemist offers support in multiple
+        languages, including English, Spanish, French, Swahili, and Mandarin, to make healthcare more accessible globally.
+    </p>
+    <img src="{% static 'chatbot/images/multilingual_support.jpg' %}" alt="Multilingual Support" width="600" height="400">
+</section>
+</main>
+<div class="chat-container">
+<h1>Health Chatbot</h1>
+
+{% if user_input and bot_response %}
+<div class="chat-box">
+    <strong>You:</strong> {{ user_input }}
+</div>
+<div class="chat-box">
+    <strong>Bot:</strong> {{ bot_response }}
+</div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="chat-input">
+        <textarea name="user_input" rows="2" placeholder="Ask me a health-related question..."></textarea>
+        <button type="submit">Send</button>
+    </div>
+</form>
+</div>
+    <footer>
+        <p>&copy; 2024 Dovey Chemist | Bringing healthcare closer to you.</p>
+    <footer>
+        <p>&copy; 2024 Dovey Chemist</p>
+    </footer>
+</body>
+</html>

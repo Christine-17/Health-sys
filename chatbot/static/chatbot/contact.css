@@ -1,0 +1,129 @@
+ /* General Reset */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Styling for Body */
+body {
+    background-color: #f0f8ff; /* AliceBlue background */
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: #007acc; /* Bright blue */
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #005f99; /* Darker blue for buttons */
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    background-color: #0099cc; /* Lighter blue on hover */
+}
+
+/* Main Content Styles */
+main {
+    margin-top: 20px;
+    text-align: center;
+}
+
+main h2 {
+    font-size: 2em;
+    color: #005f99; /* Dark blue */
+    margin-bottom: 20px;
+}
+
+main p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+main p a {
+    color: #007acc; /* Bright blue for links */
+    text-decoration: underline;
+}
+
+main p a:hover {
+    color: #005f99; /* Darker blue on hover */
+}
+
+/* Contact Form Styles */
+.contact-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    background-color: #007acc; /* Bright blue */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #005f99; /* Darker blue for hover */
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px 0;
+    background-color: #005f99; /* Darker blue for footer */
+    color: white;
+    border-radius: 10px;
+}
+
+footer p {
+    margin: 0;
+}
